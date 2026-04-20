@@ -9,4 +9,4 @@ Este proyecto consiste en resolver un caso práctico de negocio utilizando consu
 * **Control de versiones:** GitHub.
 
 ## Informe de Análisis
-(Aquí irás escribiendo tus conclusiones cuando termines las consultas).
+-Tras analizar la base de datos, se identificaron todas las películas con clasificación 'R' (Restringida)
