@@ -1,48 +1,61 @@
-## Proyecto_Sakila
+## Proyecto Sakila: Análisis de Base de Datos
 
-### Descripción del Proyecto
-Este proyecto consiste en resolver un caso práctico de negocio utilizando consultas SQL en DBeaver.
+### Sobre el proyecto
+He usado la base de datos de Sakila para practicar consultas SQL en DBeaver. El objetivo es extraer información útil sobre el inventario de películas, los actores y el comportamiento de los alquileres.
 
-### Herramientas Utilizadas
-* **Base de Datos:** PostgreSQL
-* **Gestor de BBDD:** DBeaver.
-* **Control de versiones:** GitHub.
-
-### Informe de Análisis
-
-### Consulta 2: Clasificación 'R'
-Tras analizar la base de datos, se identificaron todas las películas con clasificación 'R' (Restringida). Esto permite segmentar el catálogo para audiencias adultas.
+### Herramientas
+* **DBeaver** (Gestor de base de datos)
+* **PostgreSQL**
+* **GitHub Desktop** (Control de versiones)
 
 ---
 
-### Consulta 3: Actores por ID
-Se extrajo un listado de actores específicos mediante su identificador único (rango de ID 30 al 40) para tareas de auditoría de registros.
+## Informe de Análisis
+
+### Consulta 2: Películas para adultos
+He filtrado el catálogo para obtener solo las películas con clasificación **'R'**. Esto sirve para identificar el contenido que requiere supervisión.
 
 ---
 
-### Consulta 4: Comparación de Idiomas
-Se intentó comparar el idioma actual con el original. Se detectó que la columna `original_language_id` contiene valores nulos en su totalidad, lo que impide una comparación efectiva en este momento.
+### Consulta 3: IDs de actores
+Saqué un listado de los actores que tienen un ID entre el **30 y el 40**. Es una consulta útil para buscar rangos específicos de registros.
 
 ---
 
-### Consulta 5: Duración de Películas
-Se realizó un análisis de los tiempos de metraje, identificando que las películas más cortas duran 46 minutos, mientras que las más largas alcanzan los 185 minutos.
+### Consulta 4: Error en idiomas
+Al intentar comparar el idioma original con el actual, me di cuenta de que la columna `original_language_id` está vacía en todas las películas. Por ahora, no se puede hacer este análisis hasta que se completen los datos.
 
 ---
 
-### Consulta 6: Búsqueda por Apellido
-Se identificaron 3 actores registrados con el apellido **Allen**: Cuba Allen, Kim Allen y Meryl Allen. Se aplicaron filtros para asegurar la precisión frente a mayúsculas.
+### Consulta 5: Películas largas y cortas
+He ordenado el catálogo por duración. Las películas más rápidas de ver duran **46 minutos** y las más largas llegan a las **3 horas y 5 minutos** (185 min).
 
 ---
 
-### Consulta 7: Conteo por Clasificación
-El catálogo cuenta con 1000 títulos distribuidos de forma variada:
-* **Mayor volumen:** PG-13 (223 títulos).
-* **Menor volumen:** G (178 títulos).
+### Consulta 6: Apellido Allen
+Busqué a todos los actores que se apellidan **Allen**. Salieron 3 resultados: Cuba, Kim y Meryl. 
 
 ---
 
-### Consulta 8: Filtro PG-13 y Larga Duración
-Se identificaron los títulos que pertenecen a la clasificación PG-13 o que tienen una duración extensa (superior a los 180 minutos).
+### Consulta 7: Inventario por edades
+Conté cuántas películas hay de cada tipo. La mayoría son **PG-13** (223), mientras que de la categoría **G** (apta para todos) hay menos cantidad (178). El resto están bastante repartidas.
 
 ---
+
+### Consulta 8: Filtro especial
+Hice una lista de películas que o bien son **PG-13** o duran más de **3 horas**. Es un filtro combinado para encontrar películas largas o de una categoría específica.
+
+---
+
+### Consulta 9: Variabilidad de precios
+Calculé cuánto varían los precios de reemplazo de los DVDs. El costo suele estar alrededor de los 20€, pero hay una **variabilidad (desviación) de unos 6€** arriba o abajo dependiendo de la película.
+
+---
+
+###Consulta 10: Valores extremos de duración
+He calculado directamente la duración mínima y máxima de las películas del inventario. La película más corta dura 46 minutos y la más larga 185 minutos. Esto confirma los datos obtenidos anteriormente mediante ordenación.
+
+---
+
+###Consulta 11: El antepenúltimo pago
+Para averiguar el coste del antepenúltimo alquiler, he consultado la tabla payment ordenando por fecha de forma descendente. Al aplicar un OFFSET 2, saltamos los dos últimos registros para obtener exactamente el valor del tercero. El importe fue de 0,99.

@@ -27,8 +27,7 @@ WHERE
 	"language_id" = "original_language_id";
 --5. Ordena las películas por duración de forma ascendente.--
 SELECT
-	"title",
-	"length"
+	"title"
 FROM
 	"film"
 ORDER BY
@@ -66,6 +65,24 @@ FROM
 	"film"
 WHERE 
 	"rating" = 'PG-13'OR "length" > 180;
+
+--9. Encuentra la variabilidad de lo que costaría reemplazar las películas.
+
+SELECT 
+    ROUND(VARIANCE("replacement_cost"), 2) AS "varianza_reemplazo",
+    ROUND(STDDEV("replacement_cost"), 2) AS "desviacion_estandar_reemplazo"
+FROM 
+    "film";
+
+--10. Encuentra la mayor y menor duración de una película de nuestra BBDD.
+
+SELECT 
+	MIN("length") as "duracion_minima",
+	MAX("length") as "duracion_maxima"
+FROM
+	"film";
+
+--11. Encuentra lo que costó el antepenúltimo alquiler ordenado por día.
 
 
 
