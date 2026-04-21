@@ -10,7 +10,7 @@ Este proyecto consiste en resolver un caso práctico de negocio utilizando consu
 
 ### Informe de Análisis
 
-#Consulta 2: **Tras analizar la base de datos, se identificaron todas las películas con clasificación 'R' (Restringida).
+#Consulta 2: Tras analizar la base de datos, se identificaron todas las películas con clasificación 'R' (Restringida).
 ---
 #Consulta 3: Se extrajo un listado de actores específicos por su identificador único (ID 30 al 40).
 ---
