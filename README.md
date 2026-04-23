@@ -59,3 +59,23 @@ He calculado directamente la duración mínima y máxima de las películas del i
 
 ###Consulta 11: El antepenúltimo pago
 Para averiguar el coste del antepenúltimo alquiler, he consultado la tabla payment ordenando por fecha de forma descendente. Al aplicar un OFFSET 2, saltamos los dos últimos registros para obtener exactamente el valor del tercero. El importe fue de 0,99.
+
+----
+
+###Consulta 12: Filtrado de clasificaciones
+He generado un listado de títulos excluyendo las categorías 'NC-17' (solo adultos) y 'G' (todos los públicos). 
+
+---
+
+###Consulta 13: Duración media por categoría
+He calculado el promedio de duración para cada clasificación de edad. Es interesante ver cómo varían los tiempos: por ejemplo, las películas de una categoría específica suelen ser más largas que otras. He redondeado el resultado a dos decimales para que el análisis sea más limpio.
+
+---
+
+Consulta 14: Películas de larga duración
+He filtrado el catálogo para localizar los títulos que superan las 3 horas (180 minutos). 
+
+---
+
+Consulta 15: Ingresos totales
+He calculado la suma de todos los pagos registrados en la tabla payment. La empresa ha generado un total de 67.416,51€ . Este dato representa la facturación bruta histórica de la plataforma.

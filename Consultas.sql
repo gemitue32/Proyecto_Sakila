@@ -31,7 +31,7 @@ SELECT
 FROM
 	"film"
 ORDER BY
-	"length" asc;
+	"length" ASC;
 /*6.Encuentra el nombre y apellido de los actores que tengan ‘Allenʼ en su 
 apellido.*/
 
@@ -83,6 +83,64 @@ FROM
 	"film";
 
 --11. Encuentra lo que costó el antepenúltimo alquiler ordenado por día.
+
+SELECT 
+	"amount", 
+	"payment_date"
+FROM 
+	"payment"
+ORDER BY 
+	"payment_date" DESC
+LIMIT 1 OFFSET 2;
+
+
+/*12. Encuentra el título de las películas en la tabla “filmˮ que no sean ni ‘NC
+17ʼ ni ‘Gʼ en cuanto a su clasificación*/
+
+
+
+SELECT 
+	"title"
+FROM 
+	"film"
+WHERE "rating" NOT IN ('NC-17', 'G');
+
+/*13. Encuentra el promedio de duración de las películas para cada 
+clasificación de la tabla film y muestra la clasificación junto con el 
+promedio de duración*/
+
+SELECT 
+	"rating",
+	round(avg("length"), 2) AS "promedio_duracion"
+FROM 
+	"film"
+GROUP BY 
+	"rating"
+ORDER BY 
+	"promedio_duracion" DESC;
+
+/*14.Encuentra el título de todas las películas que tengan una duración mayor 
+a 180 minutos.*/
+
+SELECT 
+	"title"
+FROM 
+	"film"
+WHERE 
+	"length" > 180;
+
+--15. ¿Cuánto dinero ha generado en total la empresa?
+
+SELECT 
+    SUM("amount") AS total_generado
+FROM 
+    "payment";
+
+
+
+
+
+
 
 
 
