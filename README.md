@@ -72,35 +72,64 @@ He calculado el promedio de duración para cada clasificación de edad. Es inter
 
 ---
 
-Consulta 14: Películas de larga duración
+###Consulta 14: Películas de larga duración
 He filtrado el catálogo para localizar los títulos que superan las 3 horas (180 minutos). 
 
 ---
 
-Consulta 15: Ingresos totales
+###Consulta 15: Ingresos totales
 He calculado la suma de todos los pagos registrados en la tabla payment. La empresa ha generado un total de 67.416,51€ . Este dato representa la facturación bruta histórica de la plataforma.
 
 ---
 
-Consulta 16: Clientes más recientes
+###Consulta 16: Clientes más recientes
 He obtenido el nombre de los 10 clientes con el ID más alto. Suele servir para identificar a los últimos usuarios que se han dado de alta en la plataforma.
 
 ---
 
-Consulta 17: Relación Actor-Película
+###Consulta 17: Relación Actor-Película
 He localizado a los actores que participan en 'Egg Igby'. Para lograrlo, ha sido necesario conectar tres tablas distintas (actor, film_actor y film), ya que la relación entre actores y películas es de muchos a muchos. Este es mi primer uso de un JOIN múltiple para cruzar datos complejos.
 
 ---
 
-Consulta 18: Listado de títulos únicos
+###Consulta 18: Listado de títulos únicos
 He obtenido la lista de todos los títulos de películas del catálogo. He utilizado la cláusula DISTINCT para garantizar que no aparezcan nombres duplicados en el resultado final, asegurando una lista limpia de títulos únicos.
 
 ---
 
-Consulta 19: Comedias de larga duración
+###Consulta 19: Comedias de larga duración
 He identificado las películas de género 'Comedy' que superan los 180 minutos. Tras realizar el cruce de tablas entre film, film_category y category, los resultados obtenidos son: CONTROL ANTHEM, SATURN NAME, SEARCHERS WAIT. Esto demuestra que el catálogo contiene producciones de comedia con una extensión poco habitual (más de 3 horas).
 
 ---
 
-Consulta 20: Categorías de larga duración
+###Consulta 20: Categorías de larga duración
 En este ejercicio, he combinado JOINs, GROUP BY y HAVING. El objetivo era identificar qué géneros de películas tienen, de media, una duración superior a los 110 minutos. 
+
+---
+
+###Consulta 21. Media de días de alquiler
+He calculado el promedio de días que se prestan las películas. Sale exactamente 4.99 días.
+
+Nota: En mi entorno de PostgreSQL me ha dado problemas al llamarla solo como film, así que he tenido que usar la ruta completa public.film para que conectara bien. Es un detalle de la configuración de mi base de datos, pero la lógica de la consulta es la misma.
+
+---
+
+###Consulta 22. Nombre completo de actores
+He unido las columnas de nombre y apellido para crear un listado más legible de los actores. He usado la función CONCAT incluyendo un espacio entre ambos campos.
+
+---
+
+###Consulta 23. Alquileres por día
+He analizado qué días hubo más movimiento en el videoclub. Para ello, he extraído la fecha de la columna rental_date de la tabla rental, agrupando los resultados y ordenándolos de mayor a menor actividad.
+
+---
+
+###Consulta 24. Películas con duración superior al promedio
+He filtrado las películas que duran más que la media del catálogo. El promedio de duración es de 115.27 minutos.
+
+Para resolverlo, he usado una subconsulta que calcula ese promedio global y lo compara con cada película. Así, el listado muestra solo los títulos que superan esa cifra (desde 116 minutos en adelante).
+
+---
+
+###Consulta 25. Número de alquileres por mes
+He agrupado todos los registros de la tabla rental por meses para ver la evolución del negocio. El resultado muestra que el volumen de alquileres subió mucho en los meses de verano de 2005, llegando a superar los 6.700 alquileres en julio.

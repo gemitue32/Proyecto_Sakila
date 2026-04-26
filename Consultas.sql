@@ -202,6 +202,63 @@ GROUP BY
 HAVING 
 	AVG("f"."length") > 110;
 
+--21. ¿Cuál es la media de duración del alquiler de las películas?
+
+SELECT 
+    ROUND(AVG(rental_duration), 2) AS media
+FROM 
+    public.film;
+
+/*22. Crea una columna con el nombre y apellidos de todos los actores y
+actrices.*/
+
+SELECT 
+	concat("first_name", ' ', "last_name") AS "nombre_completo"
+FROM "actor";
+
+/*23. Números de alquiler por día, ordenados por cantidad de alquiler de
+forma descendente.*/
+
+
+SELECT 
+	DATE("rental_date") AS "fecha",
+	COUNT(*) AS "total_dias"
+FROM
+	"rental"
+GROUP BY 
+	"fecha"
+ORDER BY 
+	"total_dias" desc;
+
+--24. Encuentra las películas con una duración superior al promedio.
+
+SELECT 
+	"title" as "pelicula",
+	"length" as "duracion"
+FROM "film"
+WHERE
+	"length" > (
+		SELECT AVG("length") as "promedio"
+		FROM "film"
+	
+	
+	);
+	
+--25. Averigua el número de alquileres registrados por mes.
+	
+SELECT 
+	TO_CHAR("rental_date", 'YYYY-Month') AS "mes",
+	COUNT(*) AS "total_alquileres"
+FROM
+	"rental"
+GROUP BY
+	"mes"
+ORDER BY 
+	"mes";
+
+
+	
+
 
 
 
