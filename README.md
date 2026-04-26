@@ -79,3 +79,28 @@ He filtrado el catálogo para localizar los títulos que superan las 3 horas (18
 
 Consulta 15: Ingresos totales
 He calculado la suma de todos los pagos registrados en la tabla payment. La empresa ha generado un total de 67.416,51€ . Este dato representa la facturación bruta histórica de la plataforma.
+
+---
+
+Consulta 16: Clientes más recientes
+He obtenido el nombre de los 10 clientes con el ID más alto. Suele servir para identificar a los últimos usuarios que se han dado de alta en la plataforma.
+
+---
+
+Consulta 17: Relación Actor-Película
+He localizado a los actores que participan en 'Egg Igby'. Para lograrlo, ha sido necesario conectar tres tablas distintas (actor, film_actor y film), ya que la relación entre actores y películas es de muchos a muchos. Este es mi primer uso de un JOIN múltiple para cruzar datos complejos.
+
+---
+
+Consulta 18: Listado de títulos únicos
+He obtenido la lista de todos los títulos de películas del catálogo. He utilizado la cláusula DISTINCT para garantizar que no aparezcan nombres duplicados en el resultado final, asegurando una lista limpia de títulos únicos.
+
+---
+
+Consulta 19: Comedias de larga duración
+He identificado las películas de género 'Comedy' que superan los 180 minutos. Tras realizar el cruce de tablas entre film, film_category y category, los resultados obtenidos son: CONTROL ANTHEM, SATURN NAME, SEARCHERS WAIT. Esto demuestra que el catálogo contiene producciones de comedia con una extensión poco habitual (más de 3 horas).
+
+---
+
+Consulta 20: Categorías de larga duración
+En este ejercicio, he combinado JOINs, GROUP BY y HAVING. El objetivo era identificar qué géneros de películas tienen, de media, una duración superior a los 110 minutos. 

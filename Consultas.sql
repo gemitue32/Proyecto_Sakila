@@ -136,6 +136,80 @@ SELECT
 FROM 
     "payment";
 
+--16. Muestra los 10 clientes con mayor valor de id.
+
+
+
+select 
+	concat("first_name", ' ', "last_name") as "cliente"
+from
+	"customer"
+order by 
+	"customer_id" desc
+limit 
+	10;
+
+/*17. Encuentra el nombre y apellido de los actores que aparecen en la 
+película con título ‘Egg Igbyʼ.*/
+
+
+
+SELECT 
+    a.first_name, 
+    a.last_name
+FROM actor AS a
+INNER JOIN film_actor AS fa ON a.actor_id = fa.actor_id
+INNER JOIN film AS f ON fa.film_id = f.film_id
+WHERE f.title = 'EGG IGBY';
+		
+
+--18. Selecciona todos los nombres de las películas únicos.
+
+
+
+SELECT 
+	DISTINCT "title"
+FROM
+	"film";
+
+
+/*19. Encuentra el título de las películas que son comedias y tienen una
+duración mayor a 180 minutos en la tabla “film”.*/
+
+
+SELECT 
+	"f"."title"
+FROM
+	"film" AS "f"
+INNER JOIN "film_category" AS "fc" ON "f"."film_id" = "fc"."film_id"
+INNER JOIN "category" AS "c" ON "fc"."category_id" = "c"."category_id"
+WHERE
+	"c"."name" = 'Comedy' AND "f"."length" > 180;
+
+/*20. Encuentra las categorías de películas que tienen un promedio de
+duración superior a 110 minutos y muestra el nombre de la categoría
+junto con el promedio de duración.*/
+
+SELECT 
+	"c"."name" AS "categoria",
+	ROUND(AVG("f"."length"), 2) AS "promedio"
+FROM
+	"category" AS "c"
+INNER JOIN "film_category" AS "fc" ON c.category_id = fc.category_id 
+INNER JOIN "film" AS "f" ON "fc"."film_id" = "f"."film_id"
+GROUP BY 
+	"c"."name"
+HAVING 
+	AVG("f"."length") > 110;
+
+
+
+
+
+
+
+
+
 
 
 
