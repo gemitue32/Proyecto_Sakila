@@ -133,3 +133,25 @@ Para resolverlo, he usado una subconsulta que calcula ese promedio global y lo c
 
 ###Consulta 25. Número de alquileres por mes
 He agrupado todos los registros de la tabla rental por meses para ver la evolución del negocio. El resultado muestra que el volumen de alquileres subió mucho en los meses de verano de 2005, llegando a superar los 6.700 alquileres en julio.
+
+---
+
+###Consulta 26. Estadísticas de los pagos 
+He aplicado funciones estadísticas sobre la columna amount de la tabla de pagos para entender el comportamiento del gasto de los clientes:
+
+Promedio: El pago medio por alquiler es de 4.20.
+
+Desviación Estándar: Se sitúa en 2.36.
+
+Varianza: 5.59.
+Al ser la desviación estándar relativamente baja en comparación con el promedio, se deduce que los precios de los alquileres son bastante estables y no hay una dispersión extrema entre lo que pagan unos clientes y otros.
+
+---
+
+###Consulta 27. Películas con precio de alquiler superior a la media
+He realizado un filtrado dinámico para localizar los títulos que tienen un coste de alquiler por encima del promedio general del catálogo. En lugar de usar un valor fijo, he empleado una subconsulta que calcula la media en tiempo real.
+
+---
+
+###Consulta 28. Actores con más de 40 películas
+He filtrado a los actores con mayor trayectoria de la base de datos. Para ello, he agrupado los registros en la tabla film_actor por el ID del actor y he utilizado la cláusula HAVING para mostrar solo aquellos que cuentan con más de 40 participaciones. Esto permite identificar a los perfiles más rentables o populares dentro del catálogo.

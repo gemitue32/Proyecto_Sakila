@@ -256,8 +256,72 @@ GROUP BY
 ORDER BY 
 	"mes";
 
+/*26. Encuentra el promedio, la desviación estándar y varianza del total
+pagado.*/
+
+
+SELECT 
+	ROUND(AVG("amount"), 2) AS "promedio",
+	ROUND(STDDEV("amount"), 2) AS "desviacion",
+	ROUND(VARIANCE("amount"), 2) AS "varianza"
+FROM 
+	"payment";
+
 
 	
+--27. ¿Qué películas se alquilan por encima del precio medio?
+
+select *
+from "film";
+
+select 
+	"title",
+	"rental_rate"
+from 
+	"film"
+where "rental_rate" > (
+		select 
+			round(avg("rental_rate"), 2) as "precio_medio"
+		from
+			"film"
+
+
+);
+
+/*28. Muestra el id de los actores que hayan participado en más de 40
+películas.*/
+
+SELECT 
+	"actor_id",
+	count("film_id")
+FROM 
+	"film_actor"
+GROUP BY
+	"actor_id"
+HAVING
+	count("film_id") > 40;
+
+/*29. Obtener todas las películas y, si están disponibles en el inventario,
+mostrar la cantidad disponible.*/
+
+SELECT 
+	"f"."title" AS "pelicula",
+	COUNT("i"."store_id") AS cantidad_disponible
+FROM 
+	"film" AS "f"
+LEFT JOIN "inventory" AS "i" ON "f".film_id = "i".film_id
+group by
+	"f"."title"
+order by 
+	"cantidad_disponible" DESC;
+	
+
+
+
+
+	
+
+--30. Obtener los actores y el número de películas en las que ha actuado.	
 
 
 
