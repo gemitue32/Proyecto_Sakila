@@ -306,7 +306,7 @@ mostrar la cantidad disponible.*/
 
 SELECT 
 	"f"."title" AS "pelicula",
-	COUNT("i"."store_id") AS cantidad_disponible
+	COUNT("i"."store_id") AS "cantidad_disponible"
 FROM 
 	"film" AS "f"
 LEFT JOIN "inventory" AS "i" ON "f".film_id = "i".film_id
@@ -315,13 +315,111 @@ group by
 order by 
 	"cantidad_disponible" DESC;
 	
+--30. Obtener los actores y el número de películas en las que ha actuado.	
+
+SELECT 
+	CONCAT("a"."first_name", ' ', "a"."last_name") AS "actores",
+	COUNT("f"."film_id") AS "numero_peliculas"
+FROM
+	"actor" AS "a"
+INNER JOIN "film_actor" AS "fa" ON  "a".actor_id = "fa".actor_id
+INNER JOIN "film" AS "f" ON "fa"."film_id" = "f"."film_id"
+GROUP BY 
+	CONCAT("a"."first_name", ' ', "a"."last_name")
+ORDER BY
+	"numero_peliculas" DESC;
+	
+
+/*31. Obtener todas las películas y mostrar los actores que han actuado en
+ellas, incluso si algunas películas no tienen actores asociados.*/
+
+SELECT 
+    "f"."title" AS "pelicula",
+    CONCAT("a"."first_name", ' ', "a"."last_name") AS "actor"
+FROM 
+    "film" AS "f"
+LEFT JOIN 
+    "film_actor" AS "fa" ON "f"."film_id" = "fa"."film_id"
+LEFT JOIN 
+    "actor" AS "a" ON "fa"."actor_id" = "a"."actor_id";
+
+/*32. Obtener todos los actores y mostrar las películas en las que han
+actuado, incluso si algunos actores no han actuado en ninguna película.*/
+
+SELECT 
+    "f"."title" AS "pelicula",
+    CONCAT("a"."first_name", ' ', "a"."last_name") AS "actor"
+FROM 
+    "actor" AS "a"
+LEFT JOIN "film_actor" AS "fa" ON "a"."actor_id" = "fa"."actor_id"
+LEFT JOIN "film" AS "f" ON "fa"."film_id" = "f"."film_id";
 
 
+
+
+/*33. Obtener todas las películas que tenemos y todos los registros de
+alquiler.*/
+
+SELECT 
+	"r"."rental_id" AS "ticket_alquiler",
+	"f"."title" AS "pelicula",
+	"r"."rental_date" AS "fecha_alquiler"
+FROM
+	"film" AS "f"
+LEFT JOIN 
+	"inventory" AS "i" ON "f"."film_id" = "i"."film_id"
+LEFT JOIN 
+	"rental" AS "r" ON "i"."inventory_id" = "r"."inventory_id"
+ORDER BY 
+	"pelicula";
+
+
+--34. Encuentra los 5 clientes que más dinero se hayan gastado con nosotros.
+
+SELECT 
+	CONCAT("c"."first_name", ' ' , "c"."last_name") AS "cliente",
+	SUM("p"."amount") AS "importe_total"
+FROM 
+	"customer" AS "c"
+INNER JOIN "payment" AS "p" ON "c"."customer_id" = "p"."customer_id"
+GROUP BY 
+	"cliente"
+ORDER BY 
+	"importe_total" DESC
+LIMIT 5;
 
 
 	
 
---30. Obtener los actores y el número de películas en las que ha actuado.	
+--35. Selecciona todos los actores cuyo primer nombre es 'Johnny'.
+SELECT 
+	"first_name",
+	"last_name"
+FROM 
+	"actor"
+WHERE 
+	"first_name" = 'JOHNNY'
+
+
+
+/*36. Renombra la columna “first_name” como Nombre y “last_name” como
+Apellido.*/
+SELECT 
+	"first_name" AS "Nombre",
+	"last_name" AS "Apellido"
+FROM 
+	"actor";
+
+--37. Encuentra el ID del actor más bajo y más alto en la tabla actor.
+--38. Cuenta cuántos actores hay en la tabla “actor”.
+/*39. Selecciona todos los actores y ordénalos por apellido en orden
+ascendente.*/
+--40. Selecciona las primeras 5 películas de la tabla “film”.
+	
+	
+
+
+
 
 
 

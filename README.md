@@ -155,3 +155,43 @@ He realizado un filtrado dinámico para localizar los títulos que tienen un cos
 
 ###Consulta 28. Actores con más de 40 películas
 He filtrado a los actores con mayor trayectoria de la base de datos. Para ello, he agrupado los registros en la tabla film_actor por el ID del actor y he utilizado la cláusula HAVING para mostrar solo aquellos que cuentan con más de 40 participaciones. Esto permite identificar a los perfiles más rentables o populares dentro del catálogo.
+
+---
+
+###Consulta 29. Disponibilidad de películas en inventario
+He cruzado las tablas de películas e inventario para saber cuántas copias tenemos de cada título. He optado por un LEFT JOIN para que el listado incluya absolutamente todas las películas de la base de datos; de esta forma, si alguna no tiene stock, aparecerá con valor 0 en lugar de quedar excluida de la lista.
+
+---
+
+###Consulta 30. Ranking de películas por actor
+He generado un listado que muestra el volumen de trabajo de cada actor o actriz. Para conseguirlo, he unido las tablas de actor y film_actor, agrupando por sus nombres completos y contando cuántas películas tienen registradas en la base de datos. Esto nos da una visión clara de quiénes son los intérpretes con mayor presencia en nuestro catálogo.
+
+---
+
+###Consulta 31. Listado completo de películas y su reparto
+He generado un informe que vincula cada película con sus actores. Lo más importante aquí ha sido el uso de LEFT JOIN partiendo de la tabla film. Esto garantiza que el listado muestre todas las películas del catálogo, permitiéndonos detectar fácilmente si algún título no tiene actores asociados en la base de datos, ya que en esos casos el campo del actor aparecerá vacío.
+
+---
+
+###Consulta 32. Actores y su filmografía (incluyendo registros sin películas)
+He generado un listado completo de los actores de la base de datos vinculándolos con sus respectivos títulos. Al utilizar LEFT JOIN partiendo de la tabla actor, el informe garantiza la visibilidad de todos los intérpretes; si alguno de ellos no tiene películas asignadas actualmente, el campo "pelicula" aparecerá como valor nulo, facilitando la identificación de perfiles inactivos.
+
+---
+
+###Consulta 33. Relación completa de películas y sus históricos de alquiler
+He generado un informe detallado que vincula cada título del catálogo con todos sus movimientos de alquiler. Al utilizar una cadena de LEFT JOIN desde film pasando por inventory hasta llegar a rental, el resultado permite visualizar el historial completo de salidas de cada cinta, incluyendo aquellas películas que, a pesar de estar en inventario, aún no han sido alquiladas nunca.
+
+---
+
+###Consulta 34. Top 5 clientes con mayor gasto acumulado
+He identificado a nuestros clientes VIP sumando todos los pagos realizados por cada uno de ellos. Para esto, he conectado la tabla customer con payment a través de su ID común y he aplicado la función SUM sobre la columna amount. Finalmente, he ordenado los resultados de mayor a menor y limitado la salida a los 5 primeros registros.
+
+---
+
+###Consulta 35. Filtrado de actores por nombre específico
+He realizado una consulta básica de filtrado utilizando la cláusula WHERE para localizar a todos los actores cuyo nombre de pila es 'JOHNNY'. 
+
+---
+
+###Consulta 36. Uso de alias para legibilidad de reportes
+He aplicado alias a las columnas originales de la tabla actor. Al renombrar first_name como Nombre y last_name como Apellido, el resultado de la consulta es mucho más intuitivo para usuarios finales o para su integración en herramientas de visualización de datos, sin alterar la estructura real de la tabla en la base de datos.
