@@ -411,10 +411,72 @@ FROM
 	"actor";
 
 --37. Encuentra el ID del actor más bajo y más alto en la tabla actor.
+
+SELECT 
+	MIN("actor_id"),
+	MAX("actor_id")
+FROM 
+	"actor";
+	
 --38. Cuenta cuántos actores hay en la tabla “actor”.
+
+SELECT 
+	COUNT("actor_id")
+FROM
+	"actor";
+
 /*39. Selecciona todos los actores y ordénalos por apellido en orden
 ascendente.*/
+
+SELECT 
+	"first_name" AS "nombre",
+	"last_name" AS "apellidos"
+FROM 
+	"actor"
+ORDER BY
+	"last_name" ASC;
+
 --40. Selecciona las primeras 5 películas de la tabla “film”.
+
+SELECT 
+	"title"
+FROM 
+	"film"
+ORDER BY 
+	"title" ASC
+LIMIT 5;
+
+/*41.Agrupa los actores por su nombre y cuenta cuántos actores tienen el 
+mismo nombre. ¿Cuál es el nombre más repetido?*/
+
+SELECT 
+	"first_name",
+	count(*) AS "total"
+FROM
+	"actor"
+GROUP BY 
+	"first_name"
+ORDER BY
+	"total" DESC
+LIMIT 1;
+
+/*42.Encuentra todos los alquileres y los nombres de los clientes que los 
+realizaron.*/
+
+
+/*43.Muestra todos los clientes y sus alquileres si existen, incluyendo 
+aquellos que no tienen alquileres.*/
+/*44.Realiza un CROSS JOIN entre las tablas film y category. ¿Aporta valor 
+esta consulta? ¿Por qué? Deja después de la consulta la contestación.*/
+/*45.Encuentra los actores que han participado en películas de la categoría 
+'Action'.*/
+--46.Encuentra todos los actores que no han participado en películas.
+/*47.Selecciona el nombre de los actores y la cantidad de películas en las 
+que han participado.*/
+/*48.Crea una vista llamada “actor_num_peliculasˮ que muestre los nombres 
+de los actores y el número de películas en las que han participado.
+--49.Calcula el número total de alquileres realizados por cada cliente.
+--50.Calcula la duración total de las películas en la categoría 'Action'.
 	
 	
 

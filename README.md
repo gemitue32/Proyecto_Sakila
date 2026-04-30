@@ -195,3 +195,29 @@ He realizado una consulta básica de filtrado utilizando la cláusula WHERE para
 
 ###Consulta 36. Uso de alias para legibilidad de reportes
 He aplicado alias a las columnas originales de la tabla actor. Al renombrar first_name como Nombre y last_name como Apellido, el resultado de la consulta es mucho más intuitivo para usuarios finales o para su integración en herramientas de visualización de datos, sin alterar la estructura real de la tabla en la base de datos.
+
+---
+
+### Consulta 37. Identificación de rangos en la tabla de actores
+He utilizado las funciones de agregación MIN y MAX para determinar el rango de identificadores en la tabla actor. Esta consulta permite conocer de forma rapida el primer y el último ID registrados.
+
+---
+
+### Consulta 38. Conteo total de registros en la tabla actor
+He utilizado la función de agregación COUNT para obtener la cantidad total de actores registrados en la base de datos. Esta operación es fundamental para validar la integridad de la carga de datos y proporcionar métricas rápidas sobre el tamaño del catálogo.
+
+---
+
+### Consulta 39. Clasificación alfabética de actores
+He generado un listado de todos los actores del catálogo ordenados alfabéticamente por su apellido. Para ello, he utilizado la cláusula ORDER BY en modo ascendente (ASC). 
+
+---
+
+### Consulta 40. Selección limitada de registros (Top 5)
+He recuperado los títulos de las primeras cinco películas de la tabla film utilizando la cláusula LIMIT. Esta técnica es fundamental para optimizar el rendimiento de las consultas en bases de datos extensas.
+
+---
+### Consulta 41. Análisis de popularidad de nombres entre actores
+He utilizado la combinación de GROUP BY y COUNT para identificar patrones de repetición en los nombres de pila de los actores. Al ordenar los resultados según la frecuencia de aparición de forma descendente, he podido extraer de forma precisa cuál es el nombre más común en el catálogo.
+
+
