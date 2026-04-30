@@ -463,14 +463,75 @@ LIMIT 1;
 /*42.Encuentra todos los alquileres y los nombres de los clientes que los 
 realizaron.*/
 
+SELECT
+	CONCAT("c"."first_name", ' ', "c"."last_name" ) AS "clientes",
+	"r"."rental_date",
+	"r"."rental_id"
+FROM 
+	"customer" AS "c"
+INNER JOIN "rental" AS r ON "c"."customer_id" = "r"."customer_id"
+ORDER BY 
+	"rental_date" DESC;
 
 /*43.Muestra todos los clientes y sus alquileres si existen, incluyendo 
 aquellos que no tienen alquileres.*/
+
+SELECT
+	CONCAT("c"."first_name", ' ', "c"."last_name" ) AS "clientes",
+	"r"."rental_date",
+	"r"."rental_id"
+FROM 
+	"customer" AS "c"
+LEFT JOIN "rental" AS r ON "c"."customer_id" = "r"."customer_id"
+ORDER BY
+	"rental_date" DESC;
+
+
 /*44.Realiza un CROSS JOIN entre las tablas film y category. ¿Aporta valor 
 esta consulta? ¿Por qué? Deja después de la consulta la contestación.*/
+
+
+
+SELECT 
+    "f"."title" AS "pelicula",
+    "c"."name" AS "categoria"    
+FROM 
+    "film" AS "f"
+CROSS JOIN "category" AS "c";
+
+/*¿Aporta valor esta consulta?
+No, en este contexto práctico no aporta valor real.
+
+¿Por qué?
+
+Un CROSS JOIN realiza un producto cartesiano, lo que significa que empareja cada película 
+con todas las categorías existentes. El resultado muestra, por ejemplo, 
+una película de terror clasificada como "Comedia", "Infantil" y "Documental", 
+lo que genera información errónea para la toma de decisiones.
+
+
+Si tienes 1,000 películas y 16 categorías, obtendrás 16,000 filas de las cuales el 93% serán asociaciones falsas. */
+
 /*45.Encuentra los actores que han participado en películas de la categoría 
 'Action'.*/
+
+SELECT DISTINCT
+    CONCAT("a"."first_name", ' ', "a"."last_name") AS "actor"
+FROM 
+    "actor" AS "a"
+INNER JOIN "film_actor" AS "fa" ON "a"."actor_id" = "fa"."actor_id"
+INNER JOIN "film" AS "f" ON "fa"."film_id" = "f"."film_id"
+INNER JOIN "film_category" AS "fc" ON "f"."film_id" = "fc"."film_id"
+INNER JOIN "category" AS "c" ON "fc"."category_id" = "c"."category_id"
+WHERE
+    "c"."name" = 'Action';
+
+
+	
+
+
 --46.Encuentra todos los actores que no han participado en películas.
+
 /*47.Selecciona el nombre de los actores y la cantidad de películas en las 
 que han participado.*/
 /*48.Crea una vista llamada “actor_num_peliculasˮ que muestre los nombres 

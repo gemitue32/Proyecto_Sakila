@@ -220,4 +220,18 @@ He recuperado los títulos de las primeras cinco películas de la tabla film uti
 ### Consulta 41. Análisis de popularidad de nombres entre actores
 He utilizado la combinación de GROUP BY y COUNT para identificar patrones de repetición en los nombres de pila de los actores. Al ordenar los resultados según la frecuencia de aparición de forma descendente, he podido extraer de forma precisa cuál es el nombre más común en el catálogo.
 
+---
+
+### Consulta 42. Vinculación de transacciones y usuarios
+He utilizado un INNER JOIN para cruzar las tablas customer y rental. Esta consulta es fundamental para el análisis operativo, ya que permite identificar qué usuario es responsable de cada registro de alquiler en el sistema. Al ordenar por rental_date, obtenemos una cronología clara de la actividad de los clientes.
+
+---
+
+### Consulta 43. Análisis de captación vs. actividad de clientes
+He implementado un LEFT JOIN priorizando la tabla customer sobre rental. A diferencia del ejercicio anterior, esta consulta es inclusiva: muestra la totalidad de la base de datos de clientes, existan o no transacciones asociadas. Esto resulta crucial para identificar el segmento de clientes inactivos, detectables por la presencia de valores nulos en los campos de alquiler, permitiendo así diseñar estrategias de re-activación.
+
+
+
+
+
 
