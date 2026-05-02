@@ -228,7 +228,40 @@ He utilizado un INNER JOIN para cruzar las tablas customer y rental. Esta consul
 ---
 
 ### Consulta 43. Análisis de captación vs. actividad de clientes
-He implementado un LEFT JOIN priorizando la tabla customer sobre rental. A diferencia del ejercicio anterior, esta consulta es inclusiva: muestra la totalidad de la base de datos de clientes, existan o no transacciones asociadas. Esto resulta crucial para identificar el segmento de clientes inactivos, detectables por la presencia de valores nulos en los campos de alquiler, permitiendo así diseñar estrategias de re-activación.
+He implementado un LEFT JOIN priorizando la tabla customer sobre rental. A diferencia del ejercicio anterior, esta consulta es inclusiva: muestra la totalidad de la base de datos de clientes, existan o no transacciones asociadas. Esto resulta crucial para identificar el segmento de clientes inactivos, detectables por la presencia de valores nulos en los campos de alquiler.
+
+---
+
+### Consulta 44. El Producto Cartesiano (CROSS JOIN)
+He ejecutado un CROSS JOIN entre las tablas film y category para observar el comportamiento de una unión sin condiciones. Esta consulta genera todas las combinaciones posibles entre registros. Carece de valor analítico para este modelo de negocio, ya que crea relaciones artificiales que no reflejan la categorización real de los títulos.
+
+---
+###Consulta 45. Consulta Multi-Tabla: Actores por Género
+He resuelto esta consulta utilizando un encadenamiento de cinco tablas para navegar desde la entidad actor hasta category. Tal como se observa en el diagrama de la base de datos, la tabla film actúa como el nodo central que conecta la participación de los actores (film_actor) con la clasificación por géneros (film_category). La cláusula DISTINCT ha sido aplicada para garantizar un listado único de nombres, eliminando duplicidades en casos donde un mismo actor ha participado en múltiples títulos de la misma categoría.
+
+---
+###Consulta 46. Identificación de actores sin películas (Subconsultas correlacionadas)
+Para este ejercicio, el objetivo era encontrar actores que están dados de alta en la base de datos pero que no tienen ninguna película vinculada en la tabla asociativa film_actor.
+
+
+---
+###Consulta 47. Conteo de participaciones por actor
+He utilizado una combinación de INNER JOIN y GROUP BY para calcular el volumen de películas por cada actor. Al agrupar por el ID único del actor y aplicar la función de agregado COUNT, se obtiene un desglose preciso de la actividad de cada intérprete en el catálogo. He añadido un ORDER BY descendente para visualizar rápidamente a los actores más que tienen mayor numero de peliculas.
+
+---
+###Consulta 48. Persistencia de datos mediante Vistas
+He implementado la creación de una vista denominada actor_num_peliculas. Las vistas son herramientas fundamentales en SQL que permiten guardar una consulta compleja en el servidor como si fuera una tabla virtual. Esto facilita el acceso a reportes recurrentes (en este caso, la productividad de los actores) sin necesidad de reescribir todos los JOINs y las cláusulas GROUP BY en cada sesión.
+
+
+---
+#Consulta 49
+49. Volumen de alquileres por cliente
+He utilizado la función de agregado COUNT junto con un INNER JOIN para determinar la actividad de cada usuario en la plataforma. Al agrupar por el identificador único del cliente (customer_id), he podido contabilizar el número total de transacciones registradas en la tabla rental. Los resultados se han ordenado de mayor a menor para identificar fácilmente a los clientes más recurrentes.
+
+
+---
+#Consulta 50. Cálculo de métricas por categoría
+He realizado una consulta agregada para obtener la duración total en minutos de todas las películas clasificadas bajo la categoría 'Action'. Para ello, ha sido necesario vincular las tablas film, film_category y category. Utilizando la función SUM sobre la columna length y filtrando por el nombre de la categoría, el sistema devuelve el tiempo total de duracion de las peliculas de accion.
 
 
 

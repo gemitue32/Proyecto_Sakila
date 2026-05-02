@@ -532,12 +532,109 @@ WHERE
 
 --46.Encuentra todos los actores que no han participado en películas.
 
+SELECT 
+    "a"."first_name",
+    "a"."last_name"
+FROM 
+    "actor" AS "a"
+WHERE NOT EXISTS (
+    SELECT 1 
+    FROM "film_actor" AS "fa" 
+    WHERE "fa"."actor_id" = "a"."actor_id"
+);
+
+
+
+
+
+	
+
 /*47.Selecciona el nombre de los actores y la cantidad de películas en las 
 que han participado.*/
+
+SELECT 
+	"a"."first_name",
+	"a"."last_name",
+	COUNT("fa"."film_id") AS "total_peliculas"
+FROM
+	"actor" AS "a"
+INNER JOIN "film_actor" AS "fa" ON "a"."actor_id" = "fa"."actor_id"
+GROUP BY 
+	"a"."actor_id", "a"."first_name", "a"."last_name"
+ORDER BY
+	COUNT("fa"."film_id") DESC;
+
+
+
+/*48.Crea una vista llamada “actor_num_peliculasˮ que muestre los nombres 
+de los actores y el número de películas en las que han participado.*/
+
+CREATE VIEW "actor_num_peliculas" AS
+SELECT
+    "a"."first_name",
+    "a"."last_name",
+    COUNT("fa"."film_id") AS "numero_peliculas"
+FROM "actor" AS "a"
+INNER JOIN "film_actor" AS "fa" ON "a"."actor_id" = "fa"."actor_id"
+GROUP BY 
+    "a"."actor_id", "a"."first_name", "a"."last_name";
+
+-- Para consultar la vista:
+SELECT * 
+FROM "actor_num_peliculas";
+	
+
+
+--49.Calcula el número total de alquileres realizados por cada cliente.
+
+
+
+select 
+	"c"."first_name",
+	"c"."last_name",
+	count("r"."rental_id") as "total_alquileres"
+from
+	"customer" as "c"
+inner join "rental" as "r" on "c"."customer_id" = "r"."customer_id"
+group by
+	"c"."customer_id", "c"."first_name", "c"."last_name"
+	
+order by
+	"total_alquileres" desc;
+	
+
+
+
+
+--50.Calcula la duración total de las películas en la categoría 'Action'.
+
+select 
+	"c"."name" as "categoria",
+	sum("f"."length") as "duracion_total"
+from
+	"film" as "f"
+inner join "film_category" as "fc" on "f"."film_id" = "fc"."film_id"
+inner join "category" as "c" on "fc"."category_id" = "c"."category_id"
+where
+	"c"."name" = 'Action'
+group by 
+	"c"."name";
+	
+
+
+
+
+
+	
+
+
+
 /*48.Crea una vista llamada “actor_num_peliculasˮ que muestre los nombres 
 de los actores y el número de películas en las que han participado.
 --49.Calcula el número total de alquileres realizados por cada cliente.
---50.Calcula la duración total de las películas en la categoría 'Action'.
+
+
+
 	
 	
 
