@@ -254,14 +254,32 @@ He implementado la creación de una vista denominada actor_num_peliculas. Las vi
 
 
 ---
-#Consulta 49
-49. Volumen de alquileres por cliente
+###Consulta 49. Volumen de alquileres por cliente
 He utilizado la función de agregado COUNT junto con un INNER JOIN para determinar la actividad de cada usuario en la plataforma. Al agrupar por el identificador único del cliente (customer_id), he podido contabilizar el número total de transacciones registradas en la tabla rental. Los resultados se han ordenado de mayor a menor para identificar fácilmente a los clientes más recurrentes.
 
+---
+###Consulta 50. Cálculo de métricas por categoría
+He realizado una consulta agregada para obtener la duración total en minutos de todas las películas clasificadas bajo la categoría 'Action'. Para ello, ha sido necesario vincular las tablas film, film_category y category. Utilizando la función SUM sobre la columna length y filtrando por el nombre de la categoría, el sistema devuelve el tiempo total de metraje disponible para ese género específico.
 
 ---
-#Consulta 50. Cálculo de métricas por categoría
-He realizado una consulta agregada para obtener la duración total en minutos de todas las películas clasificadas bajo la categoría 'Action'. Para ello, ha sido necesario vincular las tablas film, film_category y category. Utilizando la función SUM sobre la columna length y filtrando por el nombre de la categoría, el sistema devuelve el tiempo total de duracion de las peliculas de accion.
+###Consulta 51. Creación de tablas temporales
+He utilizado la sentencia CREATE TEMPORARY TABLE AS para generar una tabla de trabajo rápida. Esta técnica permite almacenar el resultado de un conteo complejo (COUNT con JOIN) en la memoria de la sesión actual. Es una solución ideal para mejorar el rendimiento cuando necesitamos realizar múltiples análisis sobre un mismo conjunto de datos calculados sin saturar el servidor con consultas repetitivas a las tablas originales.
+
+---
+###Consulta 52. Filtrado de datos agregados en tablas temporales
+He generado una tabla temporal para identificar las películas de mayor éxitos de alquiler. Para ello, se ha realizado un triple JOIN entre film, inventory y rental. La clave de esta consulta es la cláusula HAVING, que permite filtrar los grupos resultantes para aislar únicamente aquellos títulos cuyo conteo de alquileres es igual o superior a 10.
+
+---
+###Consulta 53. Filtrado por estados nulos y condiciones múltiples
+He resuelto la búsqueda de alquileres activos mediante la identificación de valores NULL en la columna return_date de la tabla rental. Para obtener los títulos, se ha realizado una cadena de JOINs desde customer hasta film. Finalmente, se ha aplicado un ordenamiento alfabético mediante ORDER BY para organizar los resultados por título.
+
+---
+### Consulta 54. Filtrado multicapa de categorías y actores
+He resuelto este ejercicio mediante una cadena de cuatro JOINs que conectan las entidades de actores y categorías. La dificultad técnica radicaba en navegar por las tablas asociativas (film_actor y film_category) para vincular los nombres con el género 'Sci-Fi'. Además, se ha implementado la cláusula DISTINCT para garantizar que cada actor aparezca una única vez, independientemente del número de producciones de ciencia ficción en las que haya participado.
+
+
+
+
 
 
 

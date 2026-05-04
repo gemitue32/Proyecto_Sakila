@@ -619,6 +619,103 @@ where
 	"c"."name" = 'Action'
 group by 
 	"c"."name";
+
+/*51.Crea una tabla temporal llamada “cliente_rentas_temporalˮ para 
+almacenar el total de alquileres por cliente.*/
+
+CREATE TEMPORARY TABLE "cliente_rentas_temporal" AS
+
+SELECT 
+	"c"."first_name",
+	"c"."last_name",
+	COUNT("r"."rental_id") AS "total_alquileres"
+FROM
+	"customer" AS "c"
+INNER JOIN "rental" AS "r" ON "c"."customer_id" = "r"."customer_id"
+GROUP BY
+	"c"."customer_id", "c"."first_name", "c"."last_name"
+	
+ORDER BY
+	"total_alquileres" DESC;
+
+SELECT *
+FROM "cliente_rentas_temporal";
+
+/*52.Crea una tabla temporal llamada “peliculas_alquiladasˮ que almacene las 
+películas que han sido alquiladas al menos 10 veces*/
+
+CREATE TEMPORARY table "peliculas_alquiladas" AS
+SELECT
+	"f"."title",
+	COUNT("r"."rental_id") AS "total_alquiler"
+FROM 
+	"film" AS "f"
+INNER JOIN "inventory" AS "i" ON "f"."film_id" = "i"."film_id"
+INNER JOIN "rental" AS "r" ON "i"."inventory_id" = "r"."inventory_id"
+GROUP BY
+	"f"."title"
+HAVING
+	COUNT("r"."rental_id") >= 10;
+
+SELECT*
+FROM "peliculas_alquiladas";
+
+/*53.Encuentra el título de las películas que han sido alquiladas por el cliente 
+con el nombre ‘Tammy Sandersʼ y que aún no se han devuelto. Ordena 
+los resultados alfabéticamente por título de película.*/
+SELECT
+	"f"."title",
+	"c"."first_name",
+	"c"."last_name"
+FROM
+	"film" AS "f"
+INNER JOIN "inventory" AS "i" ON "f"."film_id" = "i"."film_id"
+INNER JOIN "rental" AS "r" ON "i"."inventory_id" = "r"."inventory_id"
+INNER JOIN "customer" AS "c" ON "r"."customer_id" = "c"."customer_id"
+WHERE return_date IS NULL AND first_name = 'TAMMY' AND last_name = 'SANDERS'
+ORDER BY 
+	"f"."title" ASC;
+
+/*54.Encuentra los nombres de los actores que han actuado en al menos una 
+película que pertenece a la categoría ‘Sci-Fiʼ. Ordena los resultados 
+alfabéticamente por apellido.*/
+
+SELECT DISTINCT 
+	"a"."first_name",
+	"a"."last_name"
+FROM 
+	"actor" AS "a"
+INNER JOIN "film_actor" AS "fa" ON "a"."actor_id" = "fa"."actor_id"
+INNER JOIN "film_category" AS "fc" ON "fa"."film_id" = "fc"."film_id"
+INNER JOIN "category" AS "c" ON "fc"."category_id" = "c"."category_id"
+WHERE "c"."name" = 'Sci-Fi'
+ORDER BY 
+	"a"."last_name" ASC;
+
+/*55.Encuentra el nombre y apellido de los actores que han actuado en 
+películas que se alquilaron después de que la película ‘Spartacus 
+Cheaperʼ se alquilara por primera vez. Ordena los resultados 
+alfabéticamente por apellido*/
+
+SELECT DISTINCT 
+    "a"."first_name", 
+    "a"."last_name"
+FROM "actor" AS "a"
+INNER JOIN "film_actor" AS "fa" ON "a"."actor_id" = "fa"."actor_id"
+INNER JOIN "inventory" AS "i" ON "fa"."film_id" = "i"."film_id"
+INNER JOIN "rental" AS "r" ON "i"."inventory_id" = "r"."inventory_id"
+WHERE "r"."rental_date" > (
+    -- Esta subconsulta solo calcula la fecha mínima de 'Spartacus Cheaper'
+    SELECT MIN("r2"."rental_date")
+    FROM "rental" AS "r2"
+    INNER JOIN "inventory" AS "i2" ON "r2"."inventory_id" = "i2"."inventory_id"
+    INNER JOIN "film" AS "f2" ON "i2"."film_id" = "f2"."film_id"
+    WHERE "f2"."title" = 'SPARTACUS CHEAPER'
+)
+ORDER BY "a"."last_name" ASC;
+	
+
+
 	
 
 
@@ -628,10 +725,6 @@ group by
 	
 
 
-
-/*48.Crea una vista llamada “actor_num_peliculasˮ que muestre los nombres 
-de los actores y el número de películas en las que han participado.
---49.Calcula el número total de alquileres realizados por cada cliente.
 
 
 
