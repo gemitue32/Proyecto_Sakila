@@ -262,8 +262,8 @@ He utilizado la función de agregado COUNT junto con un INNER JOIN para determin
 He realizado una consulta agregada para obtener la duración total en minutos de todas las películas clasificadas bajo la categoría 'Action'. Para ello, ha sido necesario vincular las tablas film, film_category y category. Utilizando la función SUM sobre la columna length y filtrando por el nombre de la categoría, el sistema devuelve el tiempo total de metraje disponible para ese género específico.
 
 ---
-###Consulta 51. Creación de tablas temporales
-He utilizado la sentencia CREATE TEMPORARY TABLE AS para generar una tabla de trabajo rápida. Esta técnica permite almacenar el resultado de un conteo complejo (COUNT con JOIN) en la memoria de la sesión actual. Es una solución ideal para mejorar el rendimiento cuando necesitamos realizar múltiples análisis sobre un mismo conjunto de datos calculados sin saturar el servidor con consultas repetitivas a las tablas originales.
+### Consulta 51. Alquileres por cliente (Tabla temporal)
+He guardado una tabla temporal con el total de películas que ha alquilado cada cliente. Esto sirve para ver rápidamente quiénes son nuestros mejores clientes sin tener que hacer todos los cálculos de nuevo cada vez que necesitemos el dato.
 
 ---
 ###Consulta 52. Filtrado de datos agregados en tablas temporales
