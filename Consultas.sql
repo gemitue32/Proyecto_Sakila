@@ -812,6 +812,46 @@ INNER JOIN "inventory" AS "i" ON "fc"."film_id" = "i"."film_id"
 INNER JOIN "rental" AS "r" ON "i"."inventory_id" = "r"."inventory_id"
 GROUP BY 
 	"c"."name";
+
+--62. Encuentra el número de películas por categoría estrenadas en 2006.
+
+SELECT 
+	"c"."name" AS "categoria",
+	count(f."film_id") AS "total_peliculas"
+FROM 
+	"category" AS "c"
+INNER JOIN "film_category" AS "fc" ON "c"."category_id" = "fc"."category_id"
+INNER JOIN "film" AS "f" ON "fc"."film_id" = "f"."film_id"
+WHERE
+	"f"."release_year" = 2006
+GROUP BY 
+	"c"."name";
+/*63. Obtén todas las combinaciones posibles de trabajadores con las tiendas
+que tenemos.*/
+
+
+SELECT*
+FROM "store" AS "s"
+CROSS JOIN "staff" AS "st";
+
+/*64. Encuentra la cantidad total de películas alquiladas por cada cliente y
+muestra el ID del cliente, su nombre y apellido junto con la cantidad de
+películas alquiladas.*/
+
+SELECT 
+	"c"."customer_id" AS "id_cliente",
+	"c"."first_name",
+	"c"."last_name",
+	COUNT("r"."rental_id") AS "total_peliculas"
+FROM 
+	"customer" AS "c"
+LEFT JOIN "rental" AS "r" ON "c"."customer_id" = "r"."customer_id"
+GROUP BY 
+	"c"."first_name",
+	"c"."last_name",
+	"c"."customer_id";
+
+
 	
 	
 	

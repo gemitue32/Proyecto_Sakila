@@ -305,6 +305,18 @@ He resuelto este ejercicio mediante una cadena de tres JOINs que conectan las en
 ###Consulta 61. Recuento de alquileres por categoría
 He resuelto este ejercicio mediante una cadena de tres JOINs para vincular las categorías con los registros de alquiler, pasando por las tablas de películas e inventario. La lógica principal ha consistido en agrupar los resultados únicamente por el nombre de la categoría, permitiendo que la función COUNT acumule la totalidad de los alquileres realizados en cada género.
 
+---
+###Consulta 62. Películas por categoría del año 2006
+He resuelto este ejercicio mediante el uso de dos JOINs para conectar las categorías con sus respectivas películas. Para acotar el resultado al año solicitado, he aplicado un filtro WHERE sobre la columna release_year antes de realizar la agrupación. Finalmente, he agrupado los datos por el nombre de la categoría para obtener, mediante la función COUNT, el volumen total de estrenos pertenecientes a ese año específico.
+
+---
+###Consulta 63. Combinaciones totales de personal y tiendas
+He resuelto este ejercicio mediante un CROSS JOIN para obtener todas las combinaciones posibles entre la tabla de tiendas y la de trabajadores. Al no existir una condición de filtrado específica, esta operación genera un producto cartesiano que vincula cada empleado con cada una de las sedes disponibles.
+
+---
+###Consulta 64. Volumen de alquileres por cliente
+He resuelto este ejercicio mediante un LEFT JOIN entre la tabla de clientes y la de alquileres, vinculándolas a través de su ID común. Al agrupar por el identificador, nombre y apellido del cliente, he podido aplicar la función COUNT para obtener el histórico total de películas que cada usuario ha tomado en préstamo. El uso del join externo garantiza que el listado sea completo, incluyendo a todos los clientes registrados en el sistema independientemente de su volumen de actividad.
+
 
 
 
