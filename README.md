@@ -262,8 +262,8 @@ He utilizado la función de agregado COUNT junto con un INNER JOIN para determin
 He realizado una consulta agregada para obtener la duración total en minutos de todas las películas clasificadas bajo la categoría 'Action'. Para ello, ha sido necesario vincular las tablas film, film_category y category. Utilizando la función SUM sobre la columna length y filtrando por el nombre de la categoría, el sistema devuelve el tiempo total de metraje disponible para ese género específico.
 
 ---
-###Consulta 51. Creación de tablas temporales
-He utilizado la sentencia CREATE TEMPORARY TABLE AS para generar una tabla de trabajo rápida. Esta técnica permite almacenar el resultado de un conteo complejo (COUNT con JOIN) en la memoria de la sesión actual. Es una solución ideal para mejorar el rendimiento cuando necesitamos realizar múltiples análisis sobre un mismo conjunto de datos calculados sin saturar el servidor con consultas repetitivas a las tablas originales.
+### Consulta 51. Alquileres por cliente (Tabla temporal)
+He guardado una tabla temporal con el total de películas que ha alquilado cada cliente. Esto sirve para ver rápidamente quiénes son nuestros mejores clientes sin tener que hacer todos los cálculos de nuevo cada vez que necesitemos el dato.
 
 ---
 ###Consulta 52. Filtrado de datos agregados en tablas temporales
@@ -276,6 +276,37 @@ He resuelto la búsqueda de alquileres activos mediante la identificación de va
 ---
 ### Consulta 54. Filtrado multicapa de categorías y actores
 He resuelto este ejercicio mediante una cadena de cuatro JOINs que conectan las entidades de actores y categorías. La dificultad técnica radicaba en navegar por las tablas asociativas (film_actor y film_category) para vincular los nombres con el género 'Sci-Fi'. Además, se ha implementado la cláusula DISTINCT para garantizar que cada actor aparezca una única vez, independientemente del número de producciones de ciencia ficción en las que haya participado.
+
+---
+###Consulta 55. Filtrado temporal basado en hitos (Subconsultas de fecha)
+He resuelto este ejercicio mediante el uso de una subconsulta: la primera fecha de alquiler de 'Spartacus Cheaper'. Utilizando la función de agregado MIN, establezco el límite inferior para filtrar, a través de una cadena de JOINs, a los actores cuya actividad cinematográfica (registrada en rental_date) es posterior a dicho evento. Finalmente, se aplica DISTINCT y un ordenamiento alfabético por apellido para limpiar el resultado.
+
+----
+###Consulta 56. Actores fuera del género musical
+He filtrado la lista de actores para encontrar a los que nunca han participado en una película de la categoría 'Music'. Es una forma de identificar qué artistas no han trabajado todavía en el género de musicales.
+
+---
+### Consulta 57. Alquileres de larga duración
+He calculado cuánto duró cada alquiler restando el día que se llevaron la película y el día que la devolvieron. Gracias a esto, he podido mostrar solo aquellas películas que los clientes retuvieron por más de 8 días.
+
+---
+###### Consulta 58. Películas de la misma categoría
+He creado un filtro para obtener todos los títulos de películas que pertenecen al género de 'Animación'. Para lograrlo, primero le pedí al sistema que identificara el código interno de esa categoría y luego lo usé para listar todas las películas que comparten ese mismo código.
+
+---
+### Consulta 59. Películas con la misma duración que 'Dancing Fever'
+He resuelto este ejercicio mediante el uso de una subconsulta para identificar, en primer lugar, la duración exacta (columna length) del título 'Dancing Fever'. Una vez obtenido este valor numérico, lo he utilizado como filtro en la cláusula WHERE de la consulta principal para extraer todos los títulos que coinciden en tiempo. Finalmente, he aplicado un ordenamiento ascendente por título para organizar el listado alfabéticamente.
+
+---
+###Consulta 60. Clientes con alquileres diversos
+He resuelto este ejercicio mediante una cadena de tres JOINs que conectan las entidades de clientes, alquileres, inventario y películas. La clave de la consulta ha sido aplicar la función COUNT(DISTINCT ...) sobre los títulos para contabilizar únicamente películas diferentes por cada usuario. Para filtrar el volumen de alquileres, he utilizado la cláusula HAVING estableciendo el límite en un mínimo de 7 títulos distintos tras agrupar por el nombre y apellido del cliente. Finalmente, he organizado el listado alfabéticamente por apellido.
+
+---
+###Consulta 61. Recuento de alquileres por categoría
+He resuelto este ejercicio mediante una cadena de tres JOINs para vincular las categorías con los registros de alquiler, pasando por las tablas de películas e inventario. La lógica principal ha consistido en agrupar los resultados únicamente por el nombre de la categoría, permitiendo que la función COUNT acumule la totalidad de los alquileres realizados en cada género.
+
+
+
 
 
 

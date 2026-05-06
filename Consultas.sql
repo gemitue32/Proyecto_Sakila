@@ -714,6 +714,116 @@ WHERE "r"."rental_date" > (
 )
 ORDER BY "a"."last_name" ASC;
 	
+/*56. Encuentra el nombre y apellido de los actores que no han actuado en 
+ninguna película de la categoría ‘Musicʼ*/
+
+SELECT 
+    "a"."first_name", 
+    "a"."last_name"
+FROM 
+    "actor" AS "a"
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM "film_actor" AS "fa"
+    INNER JOIN "film_category" AS "fc" ON "fa"."film_id" = "fc"."film_id"
+    INNER JOIN "category" AS "c" ON "fc"."category_id" = "c"."category_id"
+    WHERE "fa"."actor_id" = "a"."actor_id" 
+      AND "c"."name" = 'Music'
+);
+
+--57. Encuentra el título de todas las películas que fueron alquiladas por más
+de 8 días.*/
+
+SELECT DISTINCT
+    "f"."title"
+FROM "film" AS "f"
+INNER JOIN "inventory" AS "i" ON "f"."film_id" = "i"."film_id"
+INNER JOIN "rental" AS "r" ON "i"."inventory_id" = "r"."inventory_id"
+WHERE ("r"."return_date" - "r"."rental_date") > INTERVAL '8 days';
+
+/*58. Encuentra el título de todas las películas que son de la misma categoría
+que ‘Animation’.*/
+
+SELECT
+	"f"."title"
+FROM
+	"film" AS "f"
+INNER JOIN "film_category" AS "fc" ON "f"."film_id" = "fc"."film_id"
+WHERE "fc"."category_id" = (
+	SELECT
+		"c"."category_id"
+	FROM
+		"category" as "c"
+	WHERE "c"."name" = 'Animation'
+
+);
+
+/*59. Encuentra los nombres de las películas que tienen la misma duración
+que la película con el título ‘Dancing Fever’. Ordena los resultados
+alfabéticamente por título de película.*/
+
+SELECT 
+	"title"
+FROM 
+	"film"
+WHERE "length" = (
+	SELECT 
+		"length"
+	FROM 
+		"film"
+	WHERE "title" = 'DANCING FEVER'
+
+
+)
+ORDER BY "title" ASC;
+
+
+
+
+/*60. Encuentra los nombres de los clientes que han alquilado al menos 7
+películas distintas. Ordena los resultados alfabéticamente por apellido.*/
+
+SELECT 
+	"c"."first_name",
+	"c"."last_name",
+	COUNT(DISTINCT "f"."title") AS "numero_peliculas"
+FROM 
+	"customer" AS "c"
+INNER JOIN "rental" AS "r" ON "c"."customer_id" = "r"."customer_id"
+INNER JOIN "inventory" AS "i" ON "r"."inventory_id" = "i"."inventory_id"
+INNER JOIN "film" AS "f" ON "i"."film_id" = "f"."film_id"
+GROUP BY 
+	"c"."first_name",
+	"c"."last_name"
+HAVING
+	COUNT(DISTINCT "f"."title") >= 7
+ORDER BY "c"."last_name" ASC;
+
+*/61. Encuentra la cantidad total de películas alquiladas por categoría y
+muestra el nombre de la categoría junto con el recuento de alquileres.*/
+
+SELECT
+	"c"."name" AS "categoria",
+	COUNT("r"."rental_id") AS "recuento_alquileres"
+FROM 
+	"category" AS "c"
+INNER JOIN "film_category" AS "fc" ON "c"."category_id" = "fc"."category_id"
+INNER JOIN "inventory" AS "i" ON "fc"."film_id" = "i"."film_id"
+INNER JOIN "rental" AS "r" ON "i"."inventory_id" = "r"."inventory_id"
+GROUP BY 
+	"c"."name";
+	
+	
+	
+	
+	
+
+
+
+
+	
+
+
 
 
 	
